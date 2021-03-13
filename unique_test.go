@@ -60,4 +60,14 @@ func TestGenerate(t *testing.T) {
 	if seededUnique1 != seededUnique2 {
 		t.Errorf("Should generate same unique with given seed.")
 	}
+
+	// should format the string to uppercase
+	if got := New(
+		GenerateParams{
+			dictionaries: [][]string{{"test"}, {"uppercase"}, {"style"}},
+			style:        "uppercase",
+		},
+	); got != "TEST_UPPERCASE_STYLE" {
+		t.Errorf(`Expect to format in uppercase style but got "%s"`, got)
+	}
 }
