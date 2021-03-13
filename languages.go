@@ -1,0 +1,32 @@
+package unique
+
+// Languages list
+var Languages = []string{
+	"british",
+	"english",
+	"irish",
+	"turkish",
+	"japanese",
+	"chinese",
+	"korean",
+	"palestinian",
+	"canadian",
+	"australian",
+	"asian",
+	"african",
+	"italian",
+	"indian",
+	"russian",
+	"american",
+	"german",
+	"european",
+	"iraqi",
+	"israeli",
+	"arab",
+	"jewish",
+	"scottish",
+	"polish",
+	"spanish",
+	"islamic",
+	"catholic",
+}
