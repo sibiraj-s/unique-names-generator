@@ -70,4 +70,24 @@ func TestGenerate(t *testing.T) {
 	); got != "TEST_UPPERCASE_STYLE" {
 		t.Errorf(`Expect to format in uppercase style but got "%s"`, got)
 	}
+
+	// should format the string to lowercase
+	if got := New(
+		GenerateParams{
+			dictionaries: [][]string{{"TEST"}, {"LOWERCASE"}, {"STYLE"}},
+			style:        "lowercase",
+		},
+	); got != "test_lowercase_style" {
+		t.Errorf(`Expect to format in lowercase style but got "%s"`, got)
+	}
+
+	if got := New(
+		GenerateParams{
+			dictionaries: [][]string{{"test"}, {"titlecase"}, {"style"}},
+			separator:    &emptySeparator,
+			style:        "titlecase",
+		},
+	); got != "TestTitlecaseStyle" {
+		t.Errorf(`Expect to format in titlecase style but got "%s"`, got)
+	}
 }
