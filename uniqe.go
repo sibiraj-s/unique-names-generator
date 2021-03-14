@@ -6,8 +6,8 @@ import (
 	"time"
 )
 
-// GenerateParams is the input argument for Generate function
-type GenerateParams struct {
+// Options is the input argument for Generate function
+type Options struct {
 	dictionaries [][]string
 	length       int
 	separator    *string
@@ -17,41 +17,41 @@ type GenerateParams struct {
 
 var defaultSeparator = "_"
 
-func (p *GenerateParams) fillDefaults() *GenerateParams {
-	if p.dictionaries == nil {
-		p.dictionaries = [][]string{Adjectives, Colors, Animals}
+func (o *Options) fillDefaults() *Options {
+	if o.dictionaries == nil {
+		o.dictionaries = [][]string{Adjectives, Colors, Animals}
 	}
 
-	if p.length == 0 {
+	if o.length == 0 {
 		defaultLength := 3
 
-		if dictLength := len(p.dictionaries); dictLength < defaultLength {
-			p.length = dictLength
+		if dictLength := len(o.dictionaries); dictLength < defaultLength {
+			o.length = dictLength
 		} else {
-			p.length = 3
+			o.length = 3
 		}
 	}
 
-	if p.seed == 0 {
-		p.seed = time.Now().Unix()
+	if o.seed == 0 {
+		o.seed = time.Now().Unix()
 	}
 
-	if p.separator == nil {
-		p.separator = &defaultSeparator
+	if o.separator == nil {
+		o.separator = &defaultSeparator
 	}
 
-	if p.style == "" {
-		p.style = "lowercase"
+	if o.style == "" {
+		o.style = "lowercase"
 	}
 
-	return p
+	return o
 }
 
 // New creates random unique names
-func New(p GenerateParams) string {
+func New(o Options) string {
 	uniqueNames := []string{}
 
-	config := p.fillDefaults()
+	config := o.fillDefaults()
 
 	for _, dict := range config.dictionaries[0:config.length] {
 		s := rand.NewSource(config.seed)
