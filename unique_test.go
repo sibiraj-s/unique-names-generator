@@ -18,12 +18,12 @@ func TestGenerate(t *testing.T) {
 	}
 
 	// should generate random names given only two dictionaries
-	if got := New(Options{dictionaries: [][]string{{"a"}, {"b"}}}); got != "a_b" {
+	if got := New(Options{Dictionaries: [][]string{{"a"}, {"b"}}}); got != "a_b" {
 		t.Errorf(`Expected to generate "a-b" but got: "%s"`, got)
 	}
 
 	// should generate random names given only one dictonary
-	if got := New(Options{dictionaries: [][]string{{"a"}}}); got != "a" {
+	if got := New(Options{Dictionaries: [][]string{{"a"}}}); got != "a" {
 		t.Errorf(`Expected to generate "a" but got: "%s"`, got)
 	}
 
@@ -33,13 +33,13 @@ func TestGenerate(t *testing.T) {
 	}
 
 	// should generate string with given length
-	if got := New(Options{length: 2}); len(strings.Split(got, "_")) != 2 {
+	if got := New(Options{Length: 2}); len(strings.Split(got, "_")) != 2 {
 		t.Errorf("Generated string is expected to be of length 2")
 	}
 
 	// should generate string with given separator
 	hypen := "-"
-	if got := New(Options{separator: &hypen}); got != "" {
+	if got := New(Options{Separator: &hypen}); got != "" {
 		match, _ := regexp.MatchString(`^\w+-\w+-\w+$`, got)
 
 		if match == false {
@@ -49,12 +49,12 @@ func TestGenerate(t *testing.T) {
 
 	// should be able to concat strings without a seperator
 	emptySeparator := ""
-	if got := New(Options{dictionaries: [][]string{{"a"}, {"b"}}, separator: &emptySeparator}); got != "ab" {
+	if got := New(Options{Dictionaries: [][]string{{"a"}, {"b"}}, Separator: &emptySeparator}); got != "ab" {
 		t.Errorf(`Expected ab but got %s`, got)
 	}
 
-	seededUnique1 := New(Options{seed: 10})
-	seededUnique2 := New(Options{seed: 10})
+	seededUnique1 := New(Options{Seed: 10})
+	seededUnique2 := New(Options{Seed: 10})
 
 	// should generate random string with given separator `underscrore`
 	if seededUnique1 != seededUnique2 {
@@ -64,8 +64,8 @@ func TestGenerate(t *testing.T) {
 	// should format the string to uppercase
 	if got := New(
 		Options{
-			dictionaries: [][]string{{"test"}, {"uppercase"}, {"style"}},
-			style:        "uppercase",
+			Dictionaries: [][]string{{"test"}, {"uppercase"}, {"style"}},
+			Style:        "uppercase",
 		},
 	); got != "TEST_UPPERCASE_STYLE" {
 		t.Errorf(`Expect to format in uppercase style but got "%s"`, got)
@@ -74,8 +74,8 @@ func TestGenerate(t *testing.T) {
 	// should format the string to lowercase
 	if got := New(
 		Options{
-			dictionaries: [][]string{{"TEST"}, {"LOWERCASE"}, {"STYLE"}},
-			style:        "lowercase",
+			Dictionaries: [][]string{{"TEST"}, {"LOWERCASE"}, {"STYLE"}},
+			Style:        "lowercase",
 		},
 	); got != "test_lowercase_style" {
 		t.Errorf(`Expect to format in lowercase style but got "%s"`, got)
@@ -83,9 +83,9 @@ func TestGenerate(t *testing.T) {
 
 	if got := New(
 		Options{
-			dictionaries: [][]string{{"test"}, {"titlecase"}, {"style"}},
-			separator:    &emptySeparator,
-			style:        "titlecase",
+			Dictionaries: [][]string{{"test"}, {"titlecase"}, {"style"}},
+			Separator:    &emptySeparator,
+			Style:        "titlecase",
 		},
 	); got != "TestTitlecaseStyle" {
 		t.Errorf(`Expect to format in titlecase style but got "%s"`, got)

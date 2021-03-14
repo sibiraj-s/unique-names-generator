@@ -8,40 +8,40 @@ import (
 
 // Options is the input argument for Generate function
 type Options struct {
-	dictionaries [][]string
-	length       int
-	separator    *string
-	seed         int64
-	style        string
+	Dictionaries [][]string
+	Length       int
+	Separator    *string
+	Seed         int64
+	Style        string
 }
 
 var defaultSeparator = "_"
 
 func (o *Options) fillDefaults() *Options {
-	if o.dictionaries == nil {
-		o.dictionaries = [][]string{Adjectives, Colors, Animals}
+	if o.Dictionaries == nil {
+		o.Dictionaries = [][]string{Adjectives, Colors, Animals}
 	}
 
-	if o.length == 0 {
+	if o.Length == 0 {
 		defaultLength := 3
 
-		if dictLength := len(o.dictionaries); dictLength < defaultLength {
-			o.length = dictLength
+		if dictLength := len(o.Dictionaries); dictLength < defaultLength {
+			o.Length = dictLength
 		} else {
-			o.length = 3
+			o.Length = 3
 		}
 	}
 
-	if o.seed == 0 {
-		o.seed = time.Now().Unix()
+	if o.Seed == 0 {
+		o.Seed = time.Now().Unix()
 	}
 
-	if o.separator == nil {
-		o.separator = &defaultSeparator
+	if o.Separator == nil {
+		o.Separator = &defaultSeparator
 	}
 
-	if o.style == "" {
-		o.style = "lowercase"
+	if o.Style == "" {
+		o.Style = "lowercase"
 	}
 
 	return o
@@ -53,14 +53,14 @@ func New(o Options) string {
 
 	config := o.fillDefaults()
 
-	for _, dict := range config.dictionaries[0:config.length] {
-		s := rand.NewSource(config.seed)
+	for _, dict := range config.Dictionaries[0:config.Length] {
+		s := rand.NewSource(config.Seed)
 
 		r := rand.New(s)
 		n := r.Intn(len(dict))
 		word := dict[n]
 
-		switch config.style {
+		switch config.Style {
 		case "uppercase":
 			word = strings.ToUpper(word)
 		case "lowercase":
@@ -72,5 +72,5 @@ func New(o Options) string {
 		uniqueNames = append(uniqueNames, word)
 	}
 
-	return strings.Join(uniqueNames, *config.separator)
+	return strings.Join(uniqueNames, *config.Separator)
 }
