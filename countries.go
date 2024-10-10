@@ -2,8 +2,8 @@ package unique
 
 // Countries list
 var Countries = []string{
+	"Abkhazia",
 	"Afghanistan",
-	"Åland Islands",
 	"Albania",
 	"Algeria",
 	"American Samoa",
@@ -15,6 +15,7 @@ var Countries = []string{
 	"Argentina",
 	"Armenia",
 	"Aruba",
+	"Artsakh",
 	"Ascension Island",
 	"Australia",
 	"Austria",
@@ -202,9 +203,11 @@ var Countries = []string{
 	"Slovenia",
 	"Solomon Islands",
 	"Somalia",
+	"Somaliland",
 	"South Africa",
 	"South Georgia & South Sandwich Islands",
 	"South Korea",
+	"South Ossetia",
 	"South Sudan",
 	"Spain",
 	"Sri Lanka",
@@ -230,6 +233,7 @@ var Countries = []string{
 	"Togo",
 	"Tokelau",
 	"Tonga",
+	"Transnistria",
 	"Trinidad & Tobago",
 	"Tristan da Cunha",
 	"Tunisia",
