@@ -19,10 +19,10 @@ func TestGenerate(t *testing.T) {
 
 	// should generate random names given only two dictionaries
 	if got := New(Options{Dictionaries: [][]string{{"a"}, {"b"}}}); got != "a_b" {
-		t.Errorf(`Expected to generate "a-b" but got: "%s"`, got)
+		t.Errorf(`Expected to generate "a_b" but got: "%s"`, got)
 	}
 
-	// should generate random names given only one dictonary
+	// should generate random names given only one dictionary
 	if got := New(Options{Dictionaries: [][]string{{"a"}}}); got != "a" {
 		t.Errorf(`Expected to generate "a" but got: "%s"`, got)
 	}
@@ -38,16 +38,16 @@ func TestGenerate(t *testing.T) {
 	}
 
 	// should generate string with given separator
-	hypen := "-"
-	if got := New(Options{Separator: &hypen}); got != "" {
+	hyphen := "-"
+	if got := New(Options{Separator: &hyphen}); got != "" {
 		match, _ := regexp.MatchString(`^\w+-\w+-\w+$`, got)
 
 		if match == false {
-			t.Errorf("String should be generated with underscore as separator")
+			t.Errorf("String should be generated with hyphen as separator")
 		}
 	}
 
-	// should be able to concat strings without a seperator
+	// should be able to concat strings without a separator
 	emptySeparator := ""
 	if got := New(Options{Dictionaries: [][]string{{"a"}, {"b"}}, Separator: &emptySeparator}); got != "ab" {
 		t.Errorf(`Expected ab but got %s`, got)
@@ -56,7 +56,7 @@ func TestGenerate(t *testing.T) {
 	seededUnique1 := New(Options{Seed: 10})
 	seededUnique2 := New(Options{Seed: 10})
 
-	// should generate random string with given separator `underscrore`
+	// should generate same random string with given seed
 	if seededUnique1 != seededUnique2 {
 		t.Errorf("Should generate same unique with given seed.")
 	}

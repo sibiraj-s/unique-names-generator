@@ -4,6 +4,9 @@ import (
 	"math/rand"
 	"strings"
 	"time"
+
+	"golang.org/x/text/cases"
+	"golang.org/x/text/language"
 )
 
 // Options is the input argument for Generate function
@@ -28,12 +31,12 @@ func (o *Options) fillDefaults() *Options {
 		if dictLength := len(o.Dictionaries); dictLength < defaultLength {
 			o.Length = dictLength
 		} else {
-			o.Length = 3
+			o.Length = defaultLength
 		}
 	}
 
 	if o.Seed == 0 {
-		o.Seed = time.Now().Unix()
+		o.Seed = time.Now().UnixNano()
 	}
 
 	if o.Separator == nil {
@@ -52,11 +55,10 @@ func New(o Options) string {
 	uniqueNames := []string{}
 
 	config := o.fillDefaults()
+	s := rand.NewSource(config.Seed)
+	r := rand.New(s)
 
 	for _, dict := range config.Dictionaries[0:config.Length] {
-		s := rand.NewSource(config.Seed)
-
-		r := rand.New(s)
 		n := r.Intn(len(dict))
 		word := dict[n]
 
@@ -66,7 +68,7 @@ func New(o Options) string {
 		case "lowercase":
 			word = strings.ToLower(word)
 		case "titlecase":
-			word = strings.Title(word)
+			word = cases.Title(language.English).String(word)
 		}
 
 		uniqueNames = append(uniqueNames, word)
