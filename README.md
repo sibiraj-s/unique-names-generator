@@ -10,10 +10,24 @@ Generate random and unique names. This package is a [Go] implementation javascri
 go get github.com/sibiraj-s/unique-names-generator
 ```
 
-[go]: https://golang.org/
+and then import it in your code:
+
+```go
+import "github.com/sibiraj-s/unique-names-generator"
+```
+
+### Usage
+
+Generate a random name:
+
+```go
+unique.New()
+```
 
 ### Documentation
 
 [![Go Reference](https://pkg.go.dev/badge/github.com/sibiraj-s/unique-names-generator.svg)](https://pkg.go.dev/github.com/sibiraj-s/unique-names-generator)
 
 Godoc site: https://pkg.go.dev/github.com/sibiraj-s/unique-names-generator#section-readme
+
+[go]: https://golang.org/
