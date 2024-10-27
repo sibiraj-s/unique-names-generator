@@ -9,7 +9,7 @@ import (
 func TestGenerate(t *testing.T) {
 
 	// should generate random string correctly
-	if got := New(Options{}); got != "" {
+	if got := New(); got != "" {
 		match, _ := regexp.MatchString(`^\w+_\w+_\w+$`, got)
 
 		if match == false {
@@ -28,7 +28,7 @@ func TestGenerate(t *testing.T) {
 	}
 
 	// should generate string with 3 random words, without any config
-	if got := New(Options{}); len(strings.Split(got, "_")) != 3 {
+	if got := New(); len(strings.Split(got, "_")) != 3 {
 		t.Errorf("Random string should be of default length 3")
 	}
 

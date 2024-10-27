@@ -18,51 +18,57 @@ type Options struct {
 	Style        string
 }
 
-var defaultSeparator = "_"
+var (
+	defaultSeparator = "_"
+	defaultStyle     = "lowercase"
+	defaultLength    = 3
+)
 
-func (o *Options) fillDefaults() *Options {
-	if o.Dictionaries == nil {
-		o.Dictionaries = [][]string{Adjectives, Colors, Animals}
+func fillDefaults(options Options) Options {
+	if options.Dictionaries == nil {
+		options.Dictionaries = [][]string{Adjectives, Colors, Animals}
 	}
 
-	if o.Length == 0 {
-		defaultLength := 3
-
-		if dictLength := len(o.Dictionaries); dictLength < defaultLength {
-			o.Length = dictLength
+	if options.Length == 0 {
+		if dictLength := len(options.Dictionaries); dictLength < defaultLength {
+			options.Length = dictLength
 		} else {
-			o.Length = defaultLength
+			options.Length = defaultLength
 		}
 	}
 
-	if o.Seed == 0 {
-		o.Seed = time.Now().UnixNano()
+	if options.Seed == 0 {
+		options.Seed = time.Now().UnixNano()
 	}
 
-	if o.Separator == nil {
-		o.Separator = &defaultSeparator
+	if options.Separator == nil {
+		options.Separator = &defaultSeparator
 	}
 
-	if o.Style == "" {
-		o.Style = "lowercase"
+	if options.Style == "" {
+		options.Style = defaultStyle
 	}
 
-	return o
+	return options
 }
 
 // New creates random unique names
-func New(o Options) string {
+func New(options ...Options) string {
 	uniqueNames := []string{}
 
-	config := o.fillDefaults()
-	s := rand.NewSource(config.Seed)
+	if len(options) == 0 {
+		options = append(options, Options{})
+	}
+
+	o := fillDefaults(options[0])
+	s := rand.NewSource(o.Seed)
 	r := rand.New(s)
 
-	for _, dict := range config.Dictionaries[0:config.Length] {
+	for _, dict := range o.Dictionaries[0:o.Length] {
 		n := r.Intn(len(dict))
 		word := dict[n]
 
-		switch config.Style {
+		switch o.Style {
 		case "uppercase":
 			word = strings.ToUpper(word)
 		case "lowercase":
@@ -74,5 +80,5 @@ func New(o Options) string {
 		uniqueNames = append(uniqueNames, word)
 	}
 
-	return strings.Join(uniqueNames, *config.Separator)
+	return strings.Join(uniqueNames, *o.Separator)
 }
