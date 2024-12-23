@@ -28,6 +28,6 @@ unique.New()
 
 [![Go Reference](https://pkg.go.dev/badge/github.com/sibiraj-s/unique-names-generator.svg)](https://pkg.go.dev/github.com/sibiraj-s/unique-names-generator)
 
-Godoc site: https://pkg.go.dev/github.com/sibiraj-s/unique-names-generator#section-readme
+Godoc site: https://pkg.go.dev/github.com/sibiraj-s/unique-names-generator
 
 [go]: https://golang.org/
