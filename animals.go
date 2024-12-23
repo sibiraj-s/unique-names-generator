@@ -42,7 +42,6 @@ var Animals = []string{
 	"bobcat",
 	"bobolink",
 	"bonobo",
-	"booby",
 	"bovid",
 	"bug",
 	"butterfly",

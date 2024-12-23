@@ -436,7 +436,6 @@ var Adjectives = []string{
 	"warm",
 	"middle",
 	"fresh",
-	"sexual",
 	"front",
 	"domestic",
 	"actual",
