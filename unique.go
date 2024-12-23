@@ -42,7 +42,7 @@ func fillDefaults(options Options) Options {
 	}
 
 	if options.Separator == nil {
-		options.Separator = &defaultSeparator
+		options.Separator = String(defaultSeparator)
 	}
 
 	if options.Style == "" {

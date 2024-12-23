@@ -38,8 +38,8 @@ func TestGenerate(t *testing.T) {
 	}
 
 	// should generate string with given separator
-	hyphen := "-"
-	if got := New(Options{Separator: &hyphen}); got != "" {
+	hyphen := String("-")
+	if got := New(Options{Separator: hyphen}); got != "" {
 		match, _ := regexp.MatchString(`^\w+-\w+-\w+$`, got)
 
 		if match == false {
@@ -48,8 +48,8 @@ func TestGenerate(t *testing.T) {
 	}
 
 	// should be able to concat strings without a separator
-	emptySeparator := ""
-	if got := New(Options{Dictionaries: [][]string{{"a"}, {"b"}}, Separator: &emptySeparator}); got != "ab" {
+	emptySeparator := String("")
+	if got := New(Options{Dictionaries: [][]string{{"a"}, {"b"}}, Separator: emptySeparator}); got != "ab" {
 		t.Errorf(`Expected ab but got %s`, got)
 	}
 
@@ -84,7 +84,7 @@ func TestGenerate(t *testing.T) {
 	if got := New(
 		Options{
 			Dictionaries: [][]string{{"test"}, {"titlecase"}, {"style"}},
-			Separator:    &emptySeparator,
+			Separator:    emptySeparator,
 			Style:        "titlecase",
 		},
 	); got != "TestTitlecaseStyle" {
